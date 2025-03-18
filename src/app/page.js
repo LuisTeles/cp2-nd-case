@@ -10,17 +10,10 @@ import { useState } from "react";
 import TransactionItem from "@/components/TransactionItem";
 import Modal from "@/components/Modal";
 
-function MyComponent() {
-  return (
-    <div>
-      <BeakerIcon className="size-6 text-blue-500" />
-      <p>...</p>
-    </div>
-  );
-}
-
 export default function Home() {
   
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [transactions, setTransactions] = useState([
     { title: "Desenvolvimento de site", price: 12000, category: "Venda", date: "13/04/2022" },
     { title: "Consultoria", price: 3500, category: "Serviço", date: "20/03/2022" },
@@ -42,13 +35,13 @@ export default function Home() {
   // }
 
   return (
-    <div className="flex flex-col min-h-screen font-roboto text-white bg-[linear-gradient(to_bottom,_#121214_15%,_#29292E_15%)]">
+    <div className="flex flex-col min-h-screen font-roboto text-white bg-[linear-gradient(to_bottom,_#121214_15%,_#29292E_15%)] p-10">
       {/* Header */}
       <header className="flex justify-between items-center p-4">
         <div>
           <Image src="/images/Logo.svg" alt="logo" width={50} height={50} />
         </div>
-        <button className="bg-yellow-500 rounded-sm text-sm text-white font-bold py-3 px-5">
+        <button onClick={() => setIsModalOpen(true)} className="bg-yellow-500 rounded-sm text-sm text-white font-bold py-3 px-5">
           Nova transação
         </button>
       </header>
@@ -113,6 +106,13 @@ export default function Home() {
 
           </div>
         </div>
+
+
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <h2>Hello Modal</h2>
+          <p>This is a modal</p> 
+        </Modal>
+         
       </main>
     </div>
   );

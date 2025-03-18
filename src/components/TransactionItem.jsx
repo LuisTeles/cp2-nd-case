@@ -13,7 +13,7 @@ const TransactionItem = ({ title, price, category, date }) => {
         <div className="flex-1 text-sm font-light">{title}</div>
         <div className={`flex-1 text-sm font-light ${isNegative}`}>{formattedPrice}</div>
         <div className="flex-1 text-sm font-light">{category}</div>
-        <div className="flex-1 text-sm font-light">{date}</div>
+        <div className="flex text-sm font-light">{date}</div>
       </div>
     );
   };
