@@ -1,103 +1,119 @@
+"use client";
+
 import Image from "next/image";
+import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
+import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
+import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+
+import { useState } from "react";
+import TransactionItem from "@/components/TransactionItem";
+import Modal from "@/components/Modal";
+
+function MyComponent() {
+  return (
+    <div>
+      <BeakerIcon className="size-6 text-blue-500" />
+      <p>...</p>
+    </div>
+  );
+}
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  
+  const [transactions, setTransactions] = useState([
+    { title: "Desenvolvimento de site", price: 12000, category: "Venda", date: "13/04/2022" },
+    { title: "Consultoria", price: 3500, category: "Serviço", date: "20/03/2022" },
+    { title: "Venda de Produto", price: 5000, category: "Venda", date: "10/03/2022" },
+    { title: "Manutenção de Sistema", price: 7200, category: "Serviço", date: "05/04/2022" },
+    { title: "Desenvolvimento de App", price: 15000, category: "Venda", date: "28/02/2022" },
+  ]);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // const addTransaction = () => {
+  //   setTransactions([
+  //     ...transactions,
+  //     {
+  //       title: "Desenvolvimento de site",
+  //       price: 12000,
+  //       category: "Venda",
+  //       date: "13/04/2022",
+  //     },
+  //   ]);
+  // }
+
+  return (
+    <div className="flex flex-col min-h-screen font-roboto text-white bg-[linear-gradient(to_bottom,_#121214_15%,_#29292E_15%)]">
+      {/* Header */}
+      <header className="flex justify-between items-center p-4">
+        <div>
+          <Image src="/images/Logo.svg" alt="logo" width={50} height={50} />
+        </div>
+        <button className="bg-yellow-500 rounded-sm text-sm text-white font-bold py-3 px-5">
+          Nova transação
+        </button>
+      </header>
+
+      {/* Div Principal */}
+      <main
+        className="flex-1 p-4
+      "
+      >
+        {/* Fluxo de caixa */}
+        <div className="flex justify-around mb-10">
+          <div className="flex bg-customgray rounded-sm justify-between items-start p-4">
+            <div>
+              <div className="text-sm font-extralight pb-2">Entradas</div>
+              <div className="text-3xl font-semibold py-2 pr-2"> R$ 17.400,00 </div>
+            </div>
+            <ArrowUpCircleIcon className="h-7 w-7 text-green-300 ml-5" />
+          </div>
+
+          <div className="flex bg-customgray rounded-sm justify-between items-start p-4">
+            <div>
+              <div className="text-sm font-extralight pb-2">Saídas</div>
+              <div className="text-3xl font-semibold py-2 pr-2"> R$ 1.256,00 </div>
+            </div>
+            <ArrowDownCircleIcon className="h-7 w-7 text-red-400 ml-5" />
+          </div>
+
+          <div className="flex bg-amber-400 rounded-sm justify-between items-start p-4">
+            <div>
+              <div className="text-sm font-extralight pb-2">Total</div>
+              <div className="text-3xl font-semibold py-2 pr-2"> R$ 16.141,00 </div>
+            </div>
+            <CurrencyDollarIcon className="h-7 w-7 text-white ml-5" />
+          </div>
+        </div>
+
+        {/* Todas Transações */}
+        <div className="flex flex-col justify-center">
+          {/* Busca */}
+          <div className="flex justify-between rounded-sm mb-4 items-center">
+            <div className="flex-1 bg-customblack rounded-sm p-3 text-sm">Busque uma transação</div>
+            <div className="flex ring-yellow-500 ring-2 rounded-sm p-3 text-sm ml-3 items-center">
+              <MagnifyingGlassIcon className="h-5 w-5 text-yellow-500 mx-3" />
+              <div className="flex-1 text-yellow-500 rounded-sm text-sm pr-5 font-bold">Buscar</div>
+            </div>
+          </div>
+
+          {/* Histórico de Transações */}
+          <div className="flex flex-col justify-center">
+            
+            {/* Transação */}
+              {transactions.map((transaction, index) => (
+                <TransactionItem
+                  key={index}
+                  title={transaction.title}
+                  price={transaction.price}
+                  category={transaction.category}
+                  date={transaction.date}
+                />
+              ))}
+
+
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
