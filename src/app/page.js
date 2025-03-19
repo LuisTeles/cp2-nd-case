@@ -11,8 +11,8 @@ import TransactionItem from "@/components/TransactionItem";
 import Modal from "@/components/Modal";
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState(""); // State to store the search term
+  const [isModalOpen, setIsModalOpen] = useState(false); // Função para abrir e fechar o modal
+  const [searchTerm, setSearchTerm] = useState(""); // Função para buscar transações
 
   const [transactions, setTransactions] = useState([
     {
@@ -52,23 +52,25 @@ export default function Home() {
     },
   ]);
 
-  // Function to add new transactions
+  // Função para adicionar uma nova transação
   const addTransaction = (newTransaction) => {
     setTransactions([...transactions, newTransaction]);
   };
 
-  // Function to calculate total "entradas" and "saidas"
+  // Função para calcular o valor total de entradas
   const totalEntradas = transactions
     .filter((transaction) => transaction.type === "entrada")
     .reduce((acc, transaction) => acc + transaction.price, 0);
 
+  // Função para calcular o valor total de saídas
   const totalSaidas = transactions
     .filter((transaction) => transaction.type === "saida")
     .reduce((acc, transaction) => acc + transaction.price, 0);
 
+  // Função para calcular o valor total entre entradas e saídas
   const total = totalEntradas - totalSaidas;
 
-  // Filter transactions based on the search term
+  // Função para filtrar transações com base na busca
   const filteredTransactions = transactions.filter((transaction) => 
     transaction.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     transaction.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -77,9 +79,14 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen font-roboto text-white bg-[linear-gradient(to_bottom,_#121214_17%,_#202024_17%)] p-0 sm:px-10">
+
       {/* Header */}
       <header className="flex justify-between items-center p-4 w-full max-w-6xl mx-auto">
+        
+        {/* Logo */}
         <Image src="/images/Logo.png" alt="logo" width={50} height={50} />
+
+        {/* Botão para abrir o modal */}
         <button
           onClick={() => setIsModalOpen(true)}
           className="bg-yellow-500 rounded-sm text-sm text-white font-bold sm:py-3 py-2 sm:px-4 px-2 transition-transform active:scale-95"
@@ -91,7 +98,8 @@ export default function Home() {
       {/* Main Content */}
       <main className="flex-1 p-4 items-center justify-center w-full max-w-6xl mx-auto">
         <div className="flex flex-col w-full max-w-5xl mx-auto">
-          {/* Fluxo de caixa */}
+
+          {/* Resumo das entradas e saídas */}
           <div className="flex overflow-x-auto space-x-4 mb-3 py-3 justify-around items-center">
             <div className="flex min-w-[250px] bg-customgray rounded-sm justify-between items-start p-4 shadow-md">
               <div>
@@ -122,7 +130,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Search Bar */}
+          {/* Barra de busca */}
           <div className="flex flex-row justify-between items-center gap-4 mb-4">
             <input
               type="text"
@@ -137,7 +145,7 @@ export default function Home() {
             </button>
           </div>
 
-          {/* Transactions List */}
+          {/* Listra de transações */}
           <div className="flex flex-col justify-center gap-2">
             {filteredTransactions.map((transaction, index) => (
               <TransactionItem
@@ -152,6 +160,7 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Modal */}
         <Modal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}

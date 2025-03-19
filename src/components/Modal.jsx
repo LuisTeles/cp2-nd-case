@@ -7,7 +7,7 @@ import {
 export default function Modal({ isOpen, onClose, addTransaction }) {
   if (!isOpen) return null;
 
-  // State for the form fields
+  // React state para os campos do formulário
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState(""); // "entrada" or "saida"
@@ -16,31 +16,31 @@ export default function Modal({ isOpen, onClose, addTransaction }) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    // Validate input
+    // Garante que todos os campos estão preenchidos
     if (!description || !price || !category) {
       alert("Please fill all fields");
       return;
     }
 
-    // Create a new transaction object
+    // Função para adicionar uma nova transação
     const newTransaction = {
       title: description,
       price: parseFloat(price),
-      category: category, // Category can be based on the type
-      date: new Date().toLocaleDateString(), // Current date
-      type: type, // Default to "entrada"
+      category: category, 
+      date: new Date().toLocaleDateString(), // Data atual
+      type: type, 
     };
 
-    // Pass the new transaction to the parent component
+    // Passa a nova transação para a função addTransaction
     addTransaction(newTransaction);
 
-    // Clear form fields
+    // Limpa os campos do formulário
     setDescription("");
     setPrice("");
     setCategory("");
     setType("entrada");
 
-    // Close the modal
+    // Fecha o modal
     onClose();
   };
 
@@ -50,7 +50,7 @@ export default function Modal({ isOpen, onClose, addTransaction }) {
         <div className="flex-1">
           <div className="text-2xl font-bold py-2 mt-5">Nova Transação</div>
 
-          {/* Description Input */}
+          {/* Formulário para descrição */}
           <input
             type="text"
             value={description}
@@ -59,7 +59,7 @@ export default function Modal({ isOpen, onClose, addTransaction }) {
             className="bg-customblack rounded-sm p-2 my-3 text-sm font-light text-white/70 w-full"
           />
 
-          {/* Price Input */}
+          {/* Formulário de preço */}
           <input
             type="number"
             value={price}
@@ -68,6 +68,7 @@ export default function Modal({ isOpen, onClose, addTransaction }) {
             className="bg-customblack rounded-sm p-2 my-3 text-sm font-light text-white/70 w-full"
           />
 
+          {/* Formulário de categoria */}
           <input
             type="text"
             value={category}
@@ -76,7 +77,7 @@ export default function Modal({ isOpen, onClose, addTransaction }) {
             className="bg-customblack rounded-sm p-2 my-3 text-sm font-light text-white/70 w-full"
           />
 
-          {/* Type Selection (Entrada or Saída) */}
+          {/* Cicla a variável type entre entrada ou saída */}
           <div className="flex flex-row items-center justify-center mb-3">
             <div
               onClick={() => setType("entrada")}
@@ -94,26 +95,7 @@ export default function Modal({ isOpen, onClose, addTransaction }) {
             </div>
           </div>
 
-          {/* <div className="flex flex-row items-center justify-center">
-            <div className="flex-1 flex-row items-center">
-              <div className="flex rounded-sm items-center justify-center bg-neutral-900/30 p-2 mr-2">
-                <ArrowUpCircleIcon className="flex size-5 text-green-300 mr-2 " />
-                <div className="flex text-base font-extralight text-white/70">
-                  Entrada
-                </div>
-              </div>
-            </div>
-            <div className="flex-1 flex-row items-center justify-center">
-              <div className="flex rounded-sm items-center justify-center bg-neutral-900/40 p-2 ml-2 flex-row">
-                <ArrowDownCircleIcon className="flex size-5 text-red-400 mr-2" />
-                <div className="flex text-base font-extralight text-white/70">
-                  Saida
-                </div>
-              </div>
-            </div>
-          </div> */}
-
-          {/* Submit Button */}
+          {/* Botão de cadastro*/}
           <button
             onClick={handleFormSubmit}
             className="bg-yellow-500 rounded-sm py-3 mt-5 w-full font-bold text-white"
@@ -122,6 +104,7 @@ export default function Modal({ isOpen, onClose, addTransaction }) {
           </button>
         </div>
 
+        {/* Botão de fechar */}
         <button className="flex text-3xl font-light" onClick={onClose}>
           &times;
         </button>

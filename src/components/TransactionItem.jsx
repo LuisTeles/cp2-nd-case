@@ -3,15 +3,18 @@ import { BookmarkIcon } from "@heroicons/react/24/outline";
 import { CalendarIcon } from "@heroicons/react/24/outline";
 
 const TransactionItem = ({ title, price, category, date, type }) => {
-    // Format price as currency
+    // Função para formatar o preço	
     const formattedPrice = new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL',
       minimumFractionDigits: 2,
     }).format(price);
   
-    const isNegative = type === ("saida") ? 'text-red-400' : 'text-green-300'; // Add color to price
-    const formattedPriceWithSpace = formattedPrice.replace('R$', price < 0 ? ' R$' : 'R$'); // Adjust spacing for negative numbers
+    // Adiciona cor ao preço
+    const isNegative = type === ("saida") ? 'text-red-400' : 'text-green-300';
+
+    // Adiciona um espaço ao sinal negativo
+    const formattedPriceWithSpace = formattedPrice.replace('R$', price < 0 ? ' R$' : 'R$');
 
     return (
       <div className="flex sm:justify-between bg-customgray rounded-sm px-5 py-3 my-1 sm:items-center flex-col sm:flex-row gap-1 sm:gap-0 shadow-xl">
