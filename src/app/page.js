@@ -80,7 +80,7 @@ export default function Home() {
   // }
 
   return (
-    <div className="flex flex-col min-h-screen font-roboto text-white bg-[linear-gradient(to_bottom,_#121214_17%,_#29292E_17%)] p-0 sm:p-10">
+    <div className="flex flex-col min-h-screen font-roboto text-white bg-[linear-gradient(to_bottom,_#121214_17%,_#202024_17%)] p-0 sm:px-10">
       {/* Header */}
       <header className="flex justify-between items-center p-4 w-full max-w-6xl mx-auto">
         {/* Logo */}
