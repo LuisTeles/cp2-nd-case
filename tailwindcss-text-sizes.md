@@ -13,3 +13,12 @@
 | text-7xl     | 4.5rem        | 1            |
 | text-8xl     | 6rem          | 1            |
 | text-9xl     | 8rem          | 1            |
+
+
+| Breakpoint | Class Prefix | Min Width |
+|------------|--------------|-----------|
+| sm         | sm           | 640px     |
+| md         | md           | 768px     |
+| lg         | lg           | 1024px    |
+| xl         | xl           | 1280px    |
+| 2xl        | 2xl          | 1536px    |

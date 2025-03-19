@@ -6,5 +6,9 @@ module.exports = {
         "custom-black": "#000000",
       },
     },
+
+    plugins: [
+      require('tailwind-scrollbar'),
+    ],
   },
 };
